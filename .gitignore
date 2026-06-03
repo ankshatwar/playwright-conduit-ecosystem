@@ -1,0 +1,20 @@
+
+# Log directories and node runtimes
+node_modules/
+npm-debug.log*
+
+# Playwright Test Execution Artifacts
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+user.json
+
+# Local Environment variables
+.env
+.env.*
+
+# Local operating system configuration caches
+.DS_Store
+Thumbs.db

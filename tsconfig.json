@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    /* Target Environment Settings */
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    
+    /* Global Dictionaries */
+    "types": ["node", "@playwright/test"],
+    "skipLibCheck": true,
+    
+    /* Strict Code Architecture Guardrails */
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    /* Safe Module Compilation Flags */
+    "isolatedModules": true
+  },
+  "include": ["src/**/*", "tests/**/*", "playwright.config.ts"]
+}
