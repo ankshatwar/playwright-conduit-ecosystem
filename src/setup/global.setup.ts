@@ -4,13 +4,12 @@ import fs from 'fs';
 const authFile = './.auth/user.json';
 
 setup('authenticate via backend API layer', async ({ playwright }) => {
-    console.log('DEBUG EMAIL:', process.env.CONDUIT_EMAIL);
-  console.log('DEBUG PASSWORD:', process.env.CONDUIT_PASSWORD ? 'SecretLoaded' : 'NOT FOUND');
+
   // 1. Initialize API context
   const apiContext = await playwright.request.newContext();
   
   // 2. Post to the API endpoint used by the application
-  const response = await apiContext.post('https://api.realworld.show/api/users/login', {
+  const response = await apiContext.post('${process.env.API_URL}/users/login', {
     data: {
       user: {
         // Read from secure local environment variables 
