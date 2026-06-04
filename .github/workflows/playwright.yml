@@ -24,10 +24,10 @@ jobs:
 
     - name: Run Playwright tests
       env:
-        BASE_URL=${{ vars.BASE_URL }}
-        API_URL=${{ vars.API_URL }}
-        CONDUIT_EMAIL=${{ secrets.CONDUIT_EMAIL }}
-        CONDUIT_PASSWORD=${{ secrets.CONDUIT_PASSWORD }}
+      BASE_URL: ${{ vars.BASE_URL }}
+      API_URL: ${{ vars.API_URL }}
+      CONDUIT_EMAIL: ${{ secrets.CONDUIT_EMAIL }}
+      CONDUIT_PASSWORD: ${{ secrets.CONDUIT_PASSWORD }}
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
