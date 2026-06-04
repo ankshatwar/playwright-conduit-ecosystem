@@ -6,7 +6,7 @@ import path from 'path';
  * https://github.com/motdotla/dotenv
  */
 
- dotenv.config({ path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -26,7 +26,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-     baseURL: process.env.BASE_URL,
+    baseURL: process.env.BASE_URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -34,16 +34,21 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-     {
+    {
       name: 'setup',
       testDir: './src/setup',   // Explicitly points Playwright to src folder
       testMatch: 'global.setup.ts',
     },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], headless: false ,
-      // Automatically injects the saved session tokens into the browser instance
-      storageState: './.auth/user.json'
+      use: {
+        ...devices['Desktop Chrome'],
+
+        //true on GitHub CI (headless), false on local machine (headed)
+        headless: process.env.CI ? true : false,
+
+        // Automatically injects the saved session tokens into the browser instance
+        storageState: './.auth/user.json'
       },
       dependencies: ['setup'] // ◄ Forces the 'setup' project to run first
     },
