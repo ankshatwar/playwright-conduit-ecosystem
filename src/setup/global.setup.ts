@@ -9,7 +9,7 @@ setup('authenticate via backend API layer', async ({ playwright }) => {
   const apiContext = await playwright.request.newContext();
   
   // 2. Post to the API endpoint used by the application
-  const response = await apiContext.post('${process.env.API_URL}/users/login', {
+  const response = await apiContext.post(`${process.env.API_URL}/users/login`, {
     data: {
       user: {
         // Read from secure local environment variables 
