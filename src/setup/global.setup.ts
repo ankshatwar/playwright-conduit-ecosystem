@@ -1,9 +1,11 @@
 import { test as setup, expect } from '@playwright/test';
 import fs from 'fs';
 
-const authFile = './auth/user.json';
+const authFile = './.auth/user.json';
 
 setup('authenticate via backend API layer', async ({ playwright }) => {
+    console.log('DEBUG EMAIL:', process.env.CONDUIT_EMAIL);
+  console.log('DEBUG PASSWORD:', process.env.CONDUIT_PASSWORD ? 'SecretLoaded' : 'NOT FOUND');
   // 1. Initialize API context
   const apiContext = await playwright.request.newContext();
   
@@ -11,8 +13,9 @@ setup('authenticate via backend API layer', async ({ playwright }) => {
   const response = await apiContext.post('https://api.realworld.show/api/users/login', {
     data: {
       user: {
-        email: 'playwright.testmail01@internal-ci.net',
-        password: 'SystemRunner2026!#'
+        // Read from secure local environment variables 
+        email: process.env.CONDUIT_EMAIL,
+        password: process.env.CONDUIT_PASSWORD
       }
     }
   });
@@ -40,7 +43,7 @@ setup('authenticate via backend API layer', async ({ playwright }) => {
   };
 
   // 4. Ensure directory exists and write the JSON file
-  fs.mkdirSync('./auth', { recursive: true });
+  fs.mkdirSync('./.auth', { recursive: true });
   fs.writeFileSync(authFile, JSON.stringify(storageState, null, 2));
   
   await apiContext.dispose();
