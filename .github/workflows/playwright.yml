@@ -21,10 +21,12 @@ jobs:
     #Recreate the .env file dynamically
     - name: Create .env file
       run: |
-        echo "BASE_URL=${{ vars.BASE_URL }}" >> .env
-        echo "API_URL=${{ vars.API_URL }}" >> .env
-        echo "CONDUIT_EMAIL=${{ secrets.CONDUIT_EMAIL }}" >> .env
-        echo "CONDUIT_PASSWORD=${{ secrets.CONDUIT_PASSWORD }}" >> .env
+        cat << 'EOF' > .env
+        BASE_URL=${{ vars.BASE_URL }}
+        API_URL=${{ vars.API_URL }}
+        CONDUIT_EMAIL=${{ secrets.CONDUIT_EMAIL }}
+        CONDUIT_PASSWORD=${{ secrets.CONDUIT_PASSWORD }}
+        EOF
 
     - name: Run Playwright tests
       run: npx playwright test
