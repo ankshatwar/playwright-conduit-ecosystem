@@ -4,7 +4,8 @@ import fs from 'fs';
 const authFile = './.auth/user.json';
 
 setup('authenticate via backend API layer', async ({ playwright }) => {
-
+  console.log('DEBUG EMAIL:', process.env.CONDUIT_EMAIL);
+  console.log('DEBUG PASSWORD:', process.env.CONDUIT_PASSWORD ? process.env.CONDUIT_PASSWORD : 'NOT FOUND');
   // 1. Initialize API context
   const apiContext = await playwright.request.newContext();
   
