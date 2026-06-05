@@ -4,11 +4,10 @@ import fs from 'fs';
 const authFile = './.auth/user.json';
 
 setup('authenticate via backend API layer', async ({ playwright }) => {
-  console.log('DEBUG EMAIL:', process.env.CONDUIT_EMAIL);
-  console.log('DEBUG PASSWORD:', process.env.CONDUIT_PASSWORD ? process.env.CONDUIT_PASSWORD : 'NOT FOUND');
+
   // 1. Initialize API context
   const apiContext = await playwright.request.newContext();
-  
+
   // 2. Post to the API endpoint used by the application
   const response = await apiContext.post(`${process.env.API_URL}/users/login`, {
     data: {
@@ -22,7 +21,7 @@ setup('authenticate via backend API layer', async ({ playwright }) => {
 
   // Verify backend system responds successfully
   expect(response.status()).toBe(200);
-  
+
   const responseBody = await response.json();
   const token = responseBody.user.token;
 
@@ -45,6 +44,6 @@ setup('authenticate via backend API layer', async ({ playwright }) => {
   // 4. Ensure directory exists and write the JSON file
   fs.mkdirSync('./.auth', { recursive: true });
   fs.writeFileSync(authFile, JSON.stringify(storageState, null, 2));
-  
+
   await apiContext.dispose();
 });
