@@ -20,7 +20,7 @@ test.describe('New article creation checks', () => {
 
         await expect(page).toHaveURL(new RegExp(`/article/.*`));
 
-        await expect(page.getByRole('heading', { level: 1 })).toHaveText(uniqueTitle);
+        await expect(page.getByRole('heading', { level: 1, name: uniqueTitle })).toBeVisible();
 
         await expect(page.getByText(body)).toBeVisible();
     });
