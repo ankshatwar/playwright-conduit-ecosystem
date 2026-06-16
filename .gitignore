@@ -17,8 +17,3 @@ playwright/.auth/
 # Local operating system configuration caches
 .DS_Store
 Thumbs.db
-
-# --- Docker Portfolio Optimizations ---
-.git
-.github
-README.md
