@@ -1,15 +1,14 @@
-
-# Log directories and node runtimes
+# Local runtimes and logs
 node_modules/
 npm-debug.log*
 
 # Playwright Test Execution Artifacts
-/test-results/
-/playwright-report/
-/blob-report/ 
-/playwright/.cache/ 
-/playwright/.auth/
-/.auth/
+test-results/
+playwright-report/
+blob-report/ 
+playwright/.cache/ 
+playwright/.auth/
+.auth/
 
 # Local Environment variables
 .env
@@ -18,3 +17,8 @@ npm-debug.log*
 # Local operating system configuration caches
 .DS_Store
 Thumbs.db
+
+# --- Docker Portfolio Optimizations ---
+.git
+.github
+README.md
