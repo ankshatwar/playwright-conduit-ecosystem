@@ -32,6 +32,8 @@ jobs:
         CONDUIT_PASSWORD: ${{ secrets.CONDUIT_PASSWORD }}
       run: |
         docker run --rm \
+          --ipc=host \
+          -e CI=true \
           -e BASE_URL="$BASE_URL" \
           -e API_URL="$API_URL" \
           -e CONDUIT_EMAIL="$CONDUIT_EMAIL" \
