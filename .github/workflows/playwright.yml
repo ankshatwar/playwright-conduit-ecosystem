@@ -33,6 +33,7 @@ jobs:
       run: |
         docker run --rm \
           --ipc=host \
+          -v ${{ github.workspace }}/playwright-report:/app/playwright-report \
           -e CI=true \
           -e BASE_URL="$BASE_URL" \
           -e API_URL="$API_URL" \
