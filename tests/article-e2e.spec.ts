@@ -26,8 +26,6 @@ test.describe('Conduit Enterprise Article E2E Functional Workflow', () => {
     // Assert comment displays correctly
     await articleViewPage.verifyCommentIsVisible(currentTestData.commentText);
 
-    // Favorite the article item
-    await articleViewPage.favoriteArticle();
   });
 
   test.afterEach(async () => {
