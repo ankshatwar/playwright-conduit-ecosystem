@@ -38,7 +38,7 @@ export default class ArticleViewPage extends BasePage {
     await this.favoriteButton.waitFor({ state: 'attached' });
 
     // Clear any pending background animations before interaction
-    await this.page.waitForLoadState('networkidle');
+    await this.favoriteButton.scrollIntoViewIfNeeded();
 
     // Fire a direct interaction command
     await this.favoriteButton.click();

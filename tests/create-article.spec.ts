@@ -1,11 +1,9 @@
-import { test, expect } from '@playwright/test';
-import CreateArticlePage from '../src/pages/CreateArticlePage';
+import { test, expect } from '../src/fixtures/test-base';
 
 test.describe('New article creation checks', () => {
 
-    test('validate form fields and successfully publish a new article via UI', async ({ page }) => {
+    test('validate form fields and successfully publish a new article via UI', async ({ page, createArticlePage }) => {
         // Initialize the Page Object Component
-        const createArticlePage = new CreateArticlePage(page);
 
         const uniqueTitle = `UI Feature Test ${Date.now()}`;
         const description = 'Testing the frontend interface form fields.';
