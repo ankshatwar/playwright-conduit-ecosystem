@@ -1,5 +1,5 @@
 import { type Page, type Locator, expect } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { BasePage } from './base.page';
 
 export default class ArticleViewPage extends BasePage {
   private readonly articleTitle: Locator;

@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test';
-import CreateArticlePage from '../pages/CreateArticlePage';
-import ArticleViewPage from '../pages/ArticleViewPage';
+import CreateArticlePage from '../pages/create-article.page';
+import ArticleViewPage from '../pages/article-view.page';
 
 type MyFixtures = {
   createArticlePage: CreateArticlePage;

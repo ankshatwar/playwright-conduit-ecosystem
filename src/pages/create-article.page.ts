@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { BasePage } from './base.page';
 
 // Inheritance: CreateArticlePage inherits all properties and methods from BasePage
 export default class CreateArticlePage extends BasePage {
