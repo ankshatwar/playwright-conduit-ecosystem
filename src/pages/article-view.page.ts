@@ -15,11 +15,14 @@ export default class ArticleViewPage extends BasePage {
     this.commentInput = page.getByPlaceholder('Write a comment...');
     this.postCommentButton = page.getByRole('button', { name: 'Post Comment' });
     this.commentCardBody = page.locator('.card-text');
-
     this.favoriteButton = page.getByRole('button', { name: /favorite article/i });
   }
 
-  async navigateTo(slug: string): Promise<void> {
+  public get title(): Locator {
+    return this.articleTitle;
+  }
+
+  async navigateToArticle(slug: string): Promise<void> {
     await this.page.goto(`/article/${slug}`);
     await expect(this.articleTitle).toBeVisible();
   }
@@ -34,13 +37,8 @@ export default class ArticleViewPage extends BasePage {
   }
 
   async favoriteArticle(): Promise<void> {
-    // Explicitly wait for the dynamic UI element to settle inside the layout
     await this.favoriteButton.waitFor({ state: 'attached' });
-
-    // Clear any pending background animations before interaction
     await this.favoriteButton.scrollIntoViewIfNeeded();
-
-    // Fire a direct interaction command
     await this.favoriteButton.click();
   }
 }

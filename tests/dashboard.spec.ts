@@ -6,7 +6,7 @@ test.describe('Enterprise Dashboard Integration', () => {
     await page.goto('/');
 
     // Assert that the global layout displays the dedicated pipeline handle
-    const navigationHeader = page.locator('.navbar');
+    const navigationHeader = page.locator('.navbar-nav');
     await expect(navigationHeader).toContainText('ci_worker_playwright_01'); 
   });
 });

@@ -7,11 +7,16 @@ export abstract class BaseHandler {
   /**
    * Method to delay a network route.
    */
-  protected async addDelay(urlPattern: string | RegExp, delayMs: number): Promise<void> {
+ protected async addDelay(urlPattern: string | RegExp, delayMs: number): Promise<void> {
     await this.page.route(urlPattern, async (route) => {
-      const response = await route.fetch();
-      await new Promise((resolve) => setTimeout(resolve, delayMs));
-      await route.fulfill({ response });
+      try {
+        const response = await route.fetch();
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        await route.fulfill({ response });
+      } catch {
+        // Page closed before route completed — safe to ignore during teardown
+        await route.abort().catch(() => {});
+      }
     });
   }
 

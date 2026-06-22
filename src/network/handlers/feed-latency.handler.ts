@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { BaseHandler } from '../network/base.handler';
+import { BaseHandler } from '../handlers/base.handler';
 
 export class FeedLatencyHandler extends BaseHandler {
   // Define the target endpoint configuration as a private, read-only property

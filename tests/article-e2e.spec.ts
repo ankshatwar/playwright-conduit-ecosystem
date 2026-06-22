@@ -1,6 +1,6 @@
 import { test } from '../src/fixtures/test-base';
 import { E2E_ARTICLE_DATA } from '../src/data/articleData';
-import { ApiUtils } from '../src/utils/ApiUtils';
+import { ApiUtils } from '../src/utils/api.util';
 
 test.describe('Conduit Enterprise Article E2E Functional Workflow', () => {
   let articleSlug: string;
@@ -16,9 +16,9 @@ test.describe('Conduit Enterprise Article E2E Functional Workflow', () => {
     articleSlug = await apiUtils.createArticleViaApi(currentTestData);
   });
 
-  test('should complete a transactional lifecycle: view, comment, and favorite', async ({ articleViewPage }) => {
+  test('should complete a transactional lifecycle: view, comment, and delete', async ({ articleViewPage }) => {
     // Navigate to the seeded asset via UI
-    await articleViewPage.navigateTo(articleSlug);
+    await articleViewPage.navigateToArticle(articleSlug);
 
     // Post a comment
     await articleViewPage.addComment(currentTestData.commentText);
