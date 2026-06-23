@@ -39,6 +39,8 @@ jobs:
           -e API_URL="$API_URL" \
           -e CONDUIT_EMAIL="$CONDUIT_EMAIL" \
           -e CONDUIT_PASSWORD="$CONDUIT_PASSWORD" \
+          -e READER_EMAIL="$READER_EMAIL" \
+          -e READER_PASSWORD="$READER_PASSWORD" \
           playwright-portfolio-suite
 
     # Store test execution artifacts for easy reporting evaluation
