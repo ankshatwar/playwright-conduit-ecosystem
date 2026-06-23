@@ -30,6 +30,8 @@ jobs:
         API_URL: ${{ vars.API_URL }}
         CONDUIT_EMAIL: ${{ secrets.CONDUIT_EMAIL }}
         CONDUIT_PASSWORD: ${{ secrets.CONDUIT_PASSWORD }}
+        READER_EMAIL: ${{ secrets.READER_EMAIL }}
+        READER_PASSWORD: ${{ secrets.READER_PASSWORD }}
       run: |
         docker run --rm \
           --ipc=host \
