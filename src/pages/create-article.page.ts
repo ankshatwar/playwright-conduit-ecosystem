@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { type Page, type Locator, expect } from '@playwright/test';
 import { BasePage } from './base.page';
 
 // Inheritance: CreateArticlePage inherits all properties and methods from BasePage
@@ -11,6 +11,7 @@ export default class CreateArticlePage extends BasePage {
   private readonly bodyTextArea: Locator;
   private readonly tagsInput: Locator;
   private readonly publishButton: Locator;
+  private readonly validationErrors: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -22,6 +23,7 @@ export default class CreateArticlePage extends BasePage {
     this.tagsInput = page.getByPlaceholder('Enter tags');
 
     this.publishButton = page.getByRole('button', { name: 'Publish Article' });
+    this.validationErrors = page.locator('ul.error-messages');
   }
 
   async navigateToEditor(): Promise<void> {
@@ -39,5 +41,10 @@ export default class CreateArticlePage extends BasePage {
 
   async submitArticle(): Promise<void> {
     await this.safeClick(this.publishButton);
+  }
+
+  async verifyValidationErrors(expectedMessages: string[]): Promise<void> {
+    await expect(this.validationErrors).toBeVisible();
+    await expect(this.validationErrors.locator('li')).toContainText(expectedMessages);
   }
 }

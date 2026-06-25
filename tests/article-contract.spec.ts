@@ -9,11 +9,11 @@ test.describe('Conduit - Dynamic API Contract Verification', () => {
   let articleSlug: string;
   let apiUtils: ApiUtils;
 
-  const currentTestData = E2E_ARTICLE_DATA.generatePayload();
-
   test.beforeEach(async ({ playwright }) => {
+    // Fresh payload per attempt so retries don't collide on the same slug
+    const testData = E2E_ARTICLE_DATA.generatePayload();
     apiUtils = new ApiUtils(playwright);
-    articleSlug = await apiUtils.createArticleViaApi(currentTestData);
+    articleSlug = await apiUtils.createArticleViaApi(testData);
   });
 
   test('should verify API response matches the contract boundaries', async ({ articleViewPage, contractValidator }) => {

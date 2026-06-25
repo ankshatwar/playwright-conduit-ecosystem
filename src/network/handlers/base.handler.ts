@@ -10,8 +10,8 @@ export abstract class BaseHandler {
  protected async addDelay(urlPattern: string | RegExp, delayMs: number): Promise<void> {
     await this.page.route(urlPattern, async (route) => {
       try {
-        const response = await route.fetch();
         await new Promise((resolve) => setTimeout(resolve, delayMs));
+        const response = await route.fetch();
         await route.fulfill({ response });
       } catch {
         // Page closed before route completed — safe to ignore during teardown

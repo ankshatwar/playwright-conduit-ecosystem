@@ -2,12 +2,16 @@ import { Response } from '@playwright/test';
 
 export interface IResponseMatchUtil {
   matches(response: Response): boolean;
-}   
+}
 
-export class GetRequestMatchUtil implements IResponseMatchUtil {
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+// Base implementation — not exported. Consumers use the named subclasses below.
+class RequestMatchUtil implements IResponseMatchUtil {
   constructor(
     private readonly urlPattern: string | RegExp,
-    private readonly expectedStatus: number = 200
+    private readonly method: HttpMethod,
+    private readonly expectedStatus: number
   ) {}
 
   matches(response: Response): boolean {
@@ -18,8 +22,20 @@ export class GetRequestMatchUtil implements IResponseMatchUtil {
 
     return (
       urlMatches &&
-      response.request().method() === 'GET' &&
+      response.request().method() === this.method &&
       response.status() === this.expectedStatus
     );
+  }
+}
+
+export class GetRequestMatchUtil extends RequestMatchUtil {
+  constructor(urlPattern: string | RegExp, expectedStatus = 200) {
+    super(urlPattern, 'GET', expectedStatus);
+  }
+}
+
+export class PostRequestMatchUtil extends RequestMatchUtil {
+  constructor(urlPattern: string | RegExp, expectedStatus = 201) {
+    super(urlPattern, 'POST', expectedStatus);
   }
 }
