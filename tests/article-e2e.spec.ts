@@ -8,7 +8,7 @@ test.describe('Conduit Enterprise Article E2E Functional Workflow', () => {
   let currentTestData: ReturnType<typeof E2E_ARTICLE_DATA.generatePayload>;
 
   test.beforeEach(async ({ playwright }) => {
-    // Fresh payload per attempt so retries don't collide on the same slug
+    // Fresh payload per attempt so retries do not collide on the same slug
     currentTestData = E2E_ARTICLE_DATA.generatePayload();
     apiUtils = new ApiUtils(playwright);
     articleSlug = await apiUtils.createArticleViaApi(currentTestData);
